@@ -189,3 +189,4 @@ print("Hello World")
 __※ 내부에 변수값이 사용되지 않고, 단순히 내부적으로 반복을 하고자 한다면 _ 사용__
 
 ### ■ 리스트 관련 기타 메서드
+![list_method](./image/list_method.png)
