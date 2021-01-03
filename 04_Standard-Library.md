@@ -41,4 +41,86 @@
           이때는 람다 함수 형태로 간단히 넣어줌
 
 
-### ■ 
+### ■ 순열과 조합
+- 모든 경우의 수를 고려해야 할 때 어떤 라이브러리를 효과적으로 사용할 수 있을까?
+- __순열__ : 서로 다른 n개에서 서로 다른 r개를 선택하여 일렬로 나열하는 것
+ * {'A', 'B', 'C'}에서 세 개를 선택하여 나열하는 경우 : 'ABC', 'ACB', 'BAC', 'CAB', 'CBA'
+- __조합__ : 서로 다른 n개에서 순서에 __상관 없이__ 서로 다른 r개를 선택하는 것
+ * {'A', 'B', 'C'}에서 순서를 고려하지 않고 두 개를 뽑는 경우 : 'AB', 'AC', 'BC'
+ 
+       순열의 수 : nPr = n * (n-1) * (n-2) * ... * (n-r+1)
+       
+       조합의 수 : nCr = {n * (n-1) * (n-2) * ... * (n-r+1)} / r!
+
+- 위의 공식을 이용하여 모든 경우의 수가 총 얼마나 될지를 짐작해서 해당 문제를 푸기 위해 모든 경우의 수를 고려하는 방법이 통할지 안할지 판단
+ * 순열의 수를 구해봤을 때, 값이 1,000만 ~ 1억 단위로 넘어가는 경우 완전 탐색을 이용했을 때 시간 초과 판정을 받을 확률이 높을 수 있음
+ * 전체 경우의 수를 고려할 때 순열과 조합을 이용함
+ 
+ 
+### ▷ 순열 라이브러리
+ 
+    from itertools import permutations
+    
+    data = ['A', 'B', 'C'] # 데이터 준비
+    
+    result = list(permutations(data, 3)) # 모든 순열 구하기
+    print(result)
+    
+    실행 결과) [('A', 'B', 'C'), ('A', 'C', 'B'), ('B', 'A', 'C'), ('B', 'C', 'A'), ('C', 'A', 'B'), ('C', 'B', 'A')] 
+    
+ 
+ 
+### ▷ 순열 라이브러리
+
+    from itertools import combinations
+    
+    data = ['A', 'B', 'C']
+    
+    result = list(combinations(data, 2)) # 모든 조합 구하기
+    print(result)
+    
+    실행 결과) [('A', 'B'), ('A', 'C'), ('B', 'C')] 
+    
+
+### ■ 중복 순열과 중복 조합
+
+    from itertools import product
+    
+    data = ['A', 'B', 'C'] # 데이터 준비
+    
+    result = list(product(data, repeat = 2)) # 2개를 뽑는 모든 순열 구하기 (중복 
+    print(result)
+    
+    
+    from itertools import combinations_with_replacement
+    
+    data = ['A', 'B', 'C'] # 데이터 준비
+    
+    result = list(combinations_with_replacement(data, 2)) # 2개를 뽑는 모든 조합 구하기 (중복 
+    print(result)
+    
+    
+    
+### ■ Counter
+- 파이썬 collections 라이브러리의 __Counter__ 는 등장 횟수를 세는 기능을 제공함
+- 리스트와 같은 반복 가능한(iterable) 객체가 주어졌을 때 __내부의 원소가 몇 번씩 등장했는지__ 를 알려줌 
+
+
+### ■ 최대 공약수와 최소 공배수
+- 최대 공약수를 구해야 할 때는 math 라이브러리의 gcd()함수를 이용
+- __최대 공약수__ : 두 수가 주어졌을 때, 공통된 약수 중에서 가장 큰 값
+- __최소 공배수__ : 두 수가 주어졌을 때, 공통된 배수 중에서 가장 작은 값
+
+      import math
+      
+      # 최소 공배수(LCM)를 구하는 함수
+      def lcm(a, b):
+        return a * b // math.gcd(a, b)
+        
+      a = 21
+      b = 14
+      
+      print(math.gcd(21, 14)) # 최대 공약수 (GCD) 계산
+      print(lcm(21, 14) # 최소 공배수(LCM) 계산
+      
+      계산 결과) 7  42
